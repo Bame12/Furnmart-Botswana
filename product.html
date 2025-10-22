@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Modern Dining Chair - Quality furniture from Furnmart Botswana with AR visualization">
+    <title>Modern Dining Chair - Furnmart Botswana</title>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Model Viewer for AR/VR -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/product.css">
+</head>
+<body>
+<!-- Skip link -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Header (Same as index.html) -->
+<header class="header" role="banner">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="index.html" aria-label="Furnmart Botswana Home">
+                    <img src="images/icons/logo.svg" alt="Furnmart Botswana Logo" class="logo">
+                </a>
+            </div>
+
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="product.html" class="nav-link active">Products</a></li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Rooms <span class="dropdown-icon">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Living Room</a></li>
+                        <li><a href="#">Bedroom</a></li>
+                        <li><a href="#">Dining Room</a></li>
+                        <li><a href="#">Office</a></li>
+                        <li><a href="#">Outdoor</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="nav-link">AR Showroom</a></li>
+                <li><a href="#" class="nav-link">Inspiration</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="icon-btn" aria-label="Search">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+                <button class="icon-btn" aria-label="User account">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </button>
+                <button class="icon-btn cart-btn" aria-label="Shopping cart (0 items)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Breadcrumb -->
+<nav aria-label="Breadcrumb" class="breadcrumb-container">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Furniture</a></li>
+            <li><a href="#">Dining</a></li>
+            <li aria-current="page">Modern Dining Chair</li>
+        </ol>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main id="main-content" role="main">
+    <section class="product-detail">
+        <div class="container">
+            <div class="product-layout">
+
+                <!-- Product Images -->
+                <div class="product-images">
+                    <div class="main-image-container">
+                        <img src="images/products/chair-1.jpg" alt="Modern Dining Chair - Main view" class="main-image" id="main-product-image">
+                        <button class="wishlist-btn-large" aria-label="Add to wishlist">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                        <!-- 360 View Button -->
+                        <button class="view-360-btn" aria-label="View 360 degree view">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M2 12h20"></path>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                            </svg>
+                            360° View
+                        </button>
+                    </div>
+
+                    <!-- Thumbnail Gallery -->
+                    <div class="thumbnail-gallery" role="list">
+                        <button class="thumbnail active" role="listitem" aria-label="View image 1">
+                            <img src="images/products/chair-1.jpg" alt="Chair view 1">
+                        </button>
+                        <button class="thumbnail" role="listitem" aria-label="View image 2">
+                            <img src="images/products/chair-1-side.jpg" alt="Chair side view">
+                        </button>
+                        <button class="thumbnail" role="listitem" aria-label="View image 3">
+                            <img src="images/products/chair-1-back.jpg" alt="Chair back view">
+                        </button>
+                        <button class="thumbnail" role="listitem" aria-label="View image 4">
+                            <img src="images/products/chair-1-detail.jpg" alt="Chair detail view">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Information -->
+                <div class="product-info-detail">
+                    <h1 class="product-title">Modern Dining Chair</h1>
+
+                    <!-- Rating -->
+                    <div class="product-rating-detail">
+                        <div class="stars-large" aria-label="Rating: 4.5 out of 5 stars">★★★★☆</div>
+                        <span class="rating-text">4.5</span>
+                        <a href="#reviews" class="rating-link">(128 reviews)</a>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="price-section">
+                        <p class="price-main">P 899</p>
+                        <p class="price-old">P 1,200</p>
+                        <span class="price-badge">Save 25%</span>
+                    </div>
+
+                    <!-- Short Description -->
+                    <p class="product-description-short">
+                        Ergonomically designed dining chair with premium fabric upholstery.
+                        Perfect blend of comfort and modern aesthetics for your dining space.
+                    </p>
+
+                    <!-- Color Selection -->
+                    <div class="option-group">
+                        <label class="option-label">Color</label>
+                        <div class="color-swatches" role="radiogroup" aria-label="Select color">
+                            <button class="color-swatch active" style="background-color: #8B7355" aria-label="Beige" aria-checked="true" role="radio"></button>
+                            <button class="color-swatch" style="background-color: #2C2C2C" aria-label="Charcoal" aria-checked="false" role="radio"></button>
+                            <button class="color-swatch" style="background-color: #4A5D68" aria-label="Blue-Gray" aria-checked="false" role="radio"></button>
+                            <button class="color-swatch" style="background-color: #E8E4D9" aria-label="Cream" aria-checked="false" role="radio"></button>
+                        </div>
+                    </div>
+
+                    <!-- Quantity Selector -->
+                    <div class="option-group">
+                        <label class="option-label" for="quantity">Quantity</label>
+                        <div class="quantity-selector">
+                            <button class="qty-btn" aria-label="Decrease quantity" id="qty-decrease">−</button>
+                            <input type="number" id="quantity" value="1" min="1" max="99" aria-label="Quantity">
+                            <button class="qty-btn" aria-label="Increase quantity" id="qty-increase">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Stock Status -->
+                    <div class="stock-status">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>In Stock - Ready to Ship</span>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button class="btn btn-primary btn-large" id="add-to-cart-detail">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                            </svg>
+                            Add to Cart
+                        </button>
+                        <button class="btn btn-secondary btn-large" id="view-ar-detail">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                            </svg>
+                            View in AR
+                        </button>
+                    </div>
+
+                    <!-- Features List -->
+                    <div class="product-features">
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Ergonomic design for maximum comfort
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Premium fabric upholstery
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Solid oak wood frame
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Weight capacity: 150kg
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Easy to clean and maintain
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Delivery Info -->
+                    <div class="delivery-info">
+                        <div class="delivery-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <rect x="1" y="3" width="15" height="13"></rect>
+                                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                            </svg>
+                            <div>
+                                <strong>Free Delivery</strong>
+                                <p>Within Gaborone & Palapye</p>
+                            </div>
+                        </div>
+                        <div class="delivery-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <div>
+                                <strong>Easy Returns</strong>
+                                <p>30-day return policy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Tabs -->
+            <div class="product-tabs">
+                <div class="tab-headers" role="tablist">
+                    <button class="tab-header active" role="tab" aria-selected="true" aria-controls="description-panel" id="description-tab">
+                        Description
+                    </button>
+                    <button class="tab-header" role="tab" aria-selected="false" aria-controls="specifications-panel" id="specifications-tab">
+                        Specifications
+                    </button>
+                    <button class="tab-header" role="tab" aria-selected="false" aria-controls="reviews-panel" id="reviews-tab">
+                        Reviews (128)
+                    </button>
+                    <button class="tab-header" role="tab" aria-selected="false" aria-controls="delivery-panel" id="delivery-tab">
+                        Delivery & Returns
+                    </button>
+                </div>
+
+                <div class="tab-content">
+                    <!-- Description Panel -->
+                    <div class="tab-panel active" role="tabpanel" id="description-panel" aria-labelledby="description-tab">
+                        <h3>Product Description</h3>
+                        <p>
+                            The Modern Dining Chair combines contemporary design with exceptional comfort.
+                            Crafted with a solid oak wood frame and premium fabric upholstery, this chair
+                            is built to last while maintaining its elegant appearance.
+                        </p>
+                        <p>
+                            The ergonomic design ensures proper back support during long dining sessions,
+                            making it perfect for both everyday meals and special occasions. The neutral
+                            color options blend seamlessly with various interior design styles.
+                        </p>
+                        <p>
+                            Each chair is handcrafted by skilled artisans in Botswana, supporting local
+                            craftsmanship while ensuring the highest quality standards.
+                        </p>
+                    </div>
+
+                    <!-- Specifications Panel -->
+                    <div class="tab-panel" role="tabpanel" id="specifications-panel" aria-labelledby="specifications-tab" hidden>
+                        <h3>Technical Specifications</h3>
+                        <table class="specifications-table">
+                            <tbody>
+                            <tr>
+                                <th>Dimensions (H x W x D)</th>
+                                <td>85cm x 45cm x 50cm</td>
+                            </tr>
+                            <tr>
+                                <th>Seat Height</th>
+                                <td>46cm</td>
+                            </tr>
+                            <tr>
+                                <th>Weight</th>
+                                <td>8.5kg</td>
+                            </tr>
+                            <tr>
+                                <th>Weight Capacity</th>
+                                <td>150kg</td>
+                            </tr>
+                            <tr>
+                                <th>Frame Material</th>
+                                <td>Solid Oak Wood</td>
+                            </tr>
+                            <tr>
+                                <th>Upholstery</th>
+                                <td>Premium Polyester Fabric</td>
+                            </tr>
+                            <tr>
+                                <th>Assembly Required</th>
+                                <td>Minimal (legs only)</td>
+                            </tr>
+                            <tr>
+                                <th>Warranty</th>
+                                <td>5 years</td>
+                            </tr>
+                            <tr>
+                                <th>Care Instructions</th>
+                                <td>Spot clean with damp cloth</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Reviews Panel -->
+                    <div class="tab-panel" role="tabpanel" id="reviews-panel" aria-labelledby="reviews-tab" hidden>
+                        <h3>Customer Reviews</h3>
+
+                        <div class="reviews-summary">
+                            <div class="rating-breakdown">
+                                <div class="overall-rating">
+                                    <span class="rating-number">4.5</span>
+                                    <div class="stars-large">★★★★☆</div>
+                                    <p>Based on 128 reviews</p>
+                                </div>
+                                <div class="rating-bars">
+                                    <div class="rating-bar-item">
+                                        <span>5★</span>
+                                        <div class="bar"><div class="bar-fill" style="width: 70%"></div></div>
+                                        <span>70%</span>
+                                    </div>
+                                    <div class="rating-bar-item">
+                                        <span>4★</span>
+                                        <div class="bar"><div class="bar-fill" style="width: 20%"></div></div>
+                                        <span>20%</span>
+                                    </div>
+                                    <div class="rating-bar-item">
+                                        <span>3★</span>
+                                        <div class="bar"><div class="bar-fill" style="width: 7%"></div></div>
+                                        <span>7%</span>
+                                    </div>
+                                    <div class="rating-bar-item">
+                                        <span>2★</span>
+                                        <div class="bar"><div class="bar-fill" style="width: 2%"></div></div>
+                                        <span>2%</span>
+                                    </div>
+                                    <div class="rating-bar-item">
+                                        <span>1★</span>
+                                        <div class="bar"><div class="bar-fill" style="width: 1%"></div></div>
+                                        <span>1%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Individual Reviews -->
+                        <div class="reviews-list">
+                            <article class="review-item">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <strong>Thabo M.</strong>
+                                        <span class="verified-badge">✓ Verified Purchase</span>
+                                    </div>
+                                    <div class="review-meta">
+                                        <div class="stars">★★★★★</div>
+                                        <time datetime="2025-09-15">September 15, 2025</time>
+                                    </div>
+                                </div>
+                                <h4 class="review-title">Excellent quality and comfort</h4>
+                                <p class="review-text">
+                                    These chairs exceeded my expectations! Very comfortable and look
+                                    amazing in my dining room. The build quality is top-notch.
+                                </p>
+                                <div class="review-helpful">
+                                    <button class="helpful-btn">Helpful (24)</button>
+                                </div>
+                            </article>
+
+                            <article class="review-item">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <strong>Keitumetse P.</strong>
+                                        <span class="verified-badge">✓ Verified Purchase</span>
+                                    </div>
+                                    <div class="review-meta">
+                                        <div class="stars">★★★★☆</div>
+                                        <time datetime="2025-09-08">September 8, 2025</time>
+                                    </div>
+                                </div>
+                                <h4 class="review-title">Great chair, easy assembly</h4>
+                                <p class="review-text">
+                                    Love the design and the AR feature helped me visualize it in my space.
+                                    Assembly was quick and easy. Only minor issue is the fabric attracts lint.
+                                </p>
+                                <div class="review-helpful">
+                                    <button class="helpful-btn">Helpful (18)</button>
+                                </div>
+                            </article>
+
+                            <article class="review-item">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <strong>Mpho K.</strong>
+                                        <span class="verified-badge">✓ Verified Purchase</span>
+                                    </div>
+                                    <div class="review-meta">
+                                        <div class="stars">★★★★★</div>
+                                        <time datetime="2025-08-29">August 29, 2025</time>
+                                    </div>
+                                </div>
+                                <h4 class="review-title">Perfect for my dining room</h4>
+                                <p class="review-text">
+                                    Bought 6 of these and they're perfect! Comfortable enough for long dinners
+                                    and very sturdy. Delivery was fast too.
+                                </p>
+                                <div class="review-helpful">
+                                    <button class="helpful-btn">Helpful (31)</button>
+                                </div>
+                            </article>
+                        </div>
+
+                        <button class="btn btn-secondary">Load More Reviews</button>
+                    </div>
+
+                    <!-- Delivery Panel -->
+                    <div class="tab-panel" role="tabpanel" id="delivery-panel" aria-labelledby="delivery-tab" hidden>
+                        <h3>Delivery Information</h3>
+                        <p>
+                            <strong>Free Delivery:</strong> Available within Gaborone and Palapye.
+                            Orders are typically delivered within 3-5 business days.
+                        </p>
+                        <p>
+                            <strong>Other Areas:</strong> Delivery available to other cities in Botswana
+                            for a small fee. Please check at checkout for specific rates.
+                        </p>
+
+                        <h3>Return Policy</h3>
+                        <p>
+                            We offer a 30-day return policy on all furniture. Items must be in original
+                            condition with all packaging intact. Return shipping costs are covered by
+                            Furnmart for defective items.
+                        </p>
+
+                        <h3>Assembly Service</h3>
+                        <p>
+                            Professional assembly service available for P 150. Our team will assemble
+                            your furniture and remove all packaging materials.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <section class="related-products" aria-label="Related products">
+                <h2 class="section-title">You May Also Like</h2>
+                <div class="products-grid">
+                    <!-- Related product cards (reuse product card structure from index.html) -->
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="images/products/table-1.jpg" alt="Dining Table" class="product-image">
+                            <button class="ar-badge" aria-label="View in AR">AR View</button>
+                            <button class="wishlist-btn" aria-label="Add to wishlist">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Modern Dining Table</h3>
+                            <p class="product-description">Seats 6-8 people</p>
+                            <div class="product-rating">
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-count">(94)</span>
+                            </div>
+                            <div class="product-footer">
+                                <p class="product-price">
+                                    <span class="price-current">P 5,499</span>
+                                </p>
+                                <button class="btn-add-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="images/products/chair-2.jpg" alt="Bar Stool" class="product-image">
+                            <button class="ar-badge" aria-label="View in AR">AR View</button>
+                            <button class="wishlist-btn" aria-label="Add to wishlist">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Modern Bar Stool</h3>
+                            <p class="product-description">Adjustable height</p>
+                            <div class="product-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span class="rating-count">(56)</span>
+                            </div>
+                            <div class="product-footer">
+                                <p class="product-price">
+                                    <span class="price-current">P 1,299</span>
+                                </p>
+                                <button class="btn-add-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="images/products/cabinet-1.jpg" alt="Storage Cabinet" class="product-image">
+                            <button class="ar-badge" aria-label="View in AR">AR View</button>
+                            <button class="wishlist-btn" aria-label="Add to wishlist">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Storage Cabinet</h3>
+                            <p class="product-description">Multiple compartments</p>
+                            <div class="product-rating">
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-count">(112)</span>
+                            </div>
+                            <div class="product-footer">
+                                <p class="product-price">
+                                    <span class="price-current">P 3,799</span>
+                                </p>
+                                <button class="btn-add-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </section>
+</main>
+
+<!-- Footer (Same as index.html) -->
+<footer class="footer" role="contentinfo">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About Furnmart</h4>
+                <p>Botswana's leading furniture retailer, bringing quality home furnishings to families since 1998.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                    <a href="#" aria-label="Instagram"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a>
+                    <a href="#" aria-label="Twitter"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Customer Service</h4>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Store Locations</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p>Subscribe for exclusive offers</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Furnmart Botswana. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- AR Modal (Same as index.html) -->
+<div id="ar-modal" class="modal" role="dialog" aria-modal="true" hidden>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>View in Your Space</h3>
+            <button class="modal-close" aria-label="Close AR viewer">&times;</button>
+        </div>
+        <div class="modal-body">
+            <model-viewer
+                    src="models/chair.glb"
+                    alt="3D model of dining chair"
+                    ar
+                    ar-modes="webxr scene-viewer quick-look"
+                    camera-controls
+                    shadow-intensity="1"
+                    style="width: 100%; height: 500px;">
+                <button slot="ar-button" class="ar-button">View in AR</button>
+            </model-viewer>
+            <div class="ar-instructions">
+                <p>Point your camera at a flat surface to place the furniture</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+<script src="js/main.js"></script>
+<script src="js/product.js"></script>
+</body>
+</html>
