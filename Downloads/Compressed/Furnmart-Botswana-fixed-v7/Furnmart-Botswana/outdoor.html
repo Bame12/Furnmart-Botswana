@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Furnmart Botswana - Modern Furniture Shopping with AR/VR Visualization" name="description"/>
+<title>Furnmart Botswana — Outdoor</title>
+<!-- Accessibility and SEO -->
+<meta content="furniture, Botswana, home furnishing, AR furniture, virtual showroom" name="keywords"/>
+<meta content="Furnmart Botswana" name="author"/>
+<!-- Favicon -->
+<link href="favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="icon.png" rel="icon" type="image/png"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Model Viewer for AR/VR -->
+<script src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js" type="module"></script>
+<!-- Main Stylesheet -->
+<link href="css/styles.css" rel="stylesheet"/>
+<link href="css/responsive.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Skip to main content for accessibility -->
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<!-- Header / Navigation -->
+<header class="header" role="banner">
+<nav aria-label="Main navigation" class="navbar" role="navigation">
+<div class="container">
+<!-- Logo -->
+<div class="navbar-brand">
+<a aria-label="Furnmart Botswana Home" href="index.html">
+<img alt="Furnmart Botswana Logo" class="logo" src="images/icons/logo.svg"/>
+</a>
+</div>
+<!-- Mobile Menu Toggle -->
+<button aria-expanded="false" aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<!-- Navigation Links -->
+<ul class="nav-links">
+<li><a class="nav-link active" href="#">Home</a></li>
+<li><a class="nav-link" href="product.html">Products</a></li>
+<li class="dropdown">
+<a class="nav-link" href="#">Rooms <span class="dropdown-icon">▼</span></a>
+<ul class="dropdown-menu">
+<li><a href="living-room.html">Living Room</a></li>
+<li><a href="bedroom.html">Bedroom</a></li>
+<li><a href="dining-room.html">Dining Room</a></li>
+<li><a href="office.html">Office</a></li>
+<li><a href="outdoor.html">Outdoor</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#">AR Showroom</a></li>
+<li><a class="nav-link" href="#">Inspiration</a></li>
+</ul>
+<!-- Right Side Actions -->
+<div class="nav-actions">
+<button aria-label="Search" class="icon-btn">
+<svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24">
+<circle cx="11" cy="11" r="8"></circle>
+<path d="m21 21-4.35-4.35"></path>
+</svg>
+</button>
+<button aria-label="User account" class="icon-btn">
+<svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24">
+<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+<circle cx="12" cy="7" r="4"></circle>
+</svg>
+</button>
+<button aria-label="Shopping cart (0 items)" class="icon-btn cart-btn">
+<svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24">
+<circle cx="9" cy="21" r="1"></circle>
+<circle cx="20" cy="21" r="1"></circle>
+<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+</svg>
+<span class="cart-count">0</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Search Overlay (Hidden by default) -->
+<div aria-hidden="true" class="search-overlay" role="search">
+<div class="search-container">
+<input aria-label="Search products" class="search-input" placeholder="Search for furniture..." type="search"/>
+<button aria-label="Close search" class="search-close">×</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main id="main-content" role="main">
+<!-- Hero Section -->
+<section aria-label="Featured promotion" class="hero">
+<div class="hero-content">
+<div class="hero-text">
+<h1 class="hero-title">Outdoor</h1>
+<p class="hero-subtitle">Discover quality furniture that transforms your home. Now with AR visualization.</p>
+<div class="hero-actions">
+<a class="btn btn-primary" href="product.html">Shop Now</a>
+<button class="btn btn-secondary" id="try-ar-btn">
+<svg fill="none" height="20" stroke="currentColor" viewbox="0 0 24 24" width="20">
+<rect height="14" rx="2" ry="2" width="20" x="2" y="3"></rect>
+<line x1="8" x2="16" y1="21" y2="21"></line>
+<line x1="12" x2="12" y1="17" y2="21"></line>
+</svg>
+                        Try AR View
+                    </button>
+</div>
+</div>
+<div class="hero-image">
+<img alt="Modern living room setup with comfortable furniture" loading="eager" src="images/rooms/hero-room.jpg"/>
+</div>
+</div>
+</section>
+<!-- Category Navigation -->
+<section aria-label="Shop by category" class="categories">
+<div class="container">
+<h2 class="section-title">Shop by Room</h2>
+<div class="category-grid">
+<a class="category-card" href="living-room.html">
+<img alt="Living Room Furniture" loading="lazy" src="images/rooms/living-room.jpg"/>
+<h3>Living Room</h3>
+</a>
+<a class="category-card" href="bedroom.html">
+<img alt="Bedroom Furniture" loading="lazy" src="images/rooms/bedroom.jpg"/>
+<h3>Bedroom</h3>
+</a>
+<a class="category-card" href="dining-room.html">
+<img alt="Dining Room Furniture" loading="lazy" src="images/rooms/dining.jpg"/>
+<h3>Dining Room</h3>
+</a>
+<a class="category-card" href="#">
+<img alt="Office Furniture" loading="lazy" src="images/rooms/office.jpg"/>
+<h3>Home Office</h3>
+</a>
+</div>
+</div>
+</section>
+<!-- Featured Products -->
+<section aria-label="Featured products" class="products-section">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Featured Products</h2>
+<a class="view-all" href="product.html">View All →</a>
+</div>
+<div class="products-grid" id="products-grid">
+<!-- Products will be dynamically loaded via JavaScript -->
+<!-- Static examples for prototype -->
+<article class="product-card">
+<div class="product-image-wrapper">
+<img alt="Modern Dining Chair" class="product-image" loading="lazy" src="images/products/chair-1.jpg"/>
+<button aria-label="View in AR" class="ar-badge">
+<svg fill="currentColor" height="16" viewbox="0 0 24 24" width="16">
+<path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"></path>
+</svg>
+                            AR View
+                        </button>
+<button aria-label="Add to wishlist" class="wishlist-btn">
+<svg fill="none" height="20" stroke="currentColor" viewbox="0 0 24 24" width="20">
+<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+</svg>
+</button>
+</div>
+<div class="product-info">
+<h3 class="product-name">Outdoor Item 1</h3>
+<p class="product-description">Comfortable ergonomic design</p>
+<div class="product-rating">
+<span aria-label="Rating: 4.5 out of 5 stars" class="stars">★★★★☆</span>
+<span class="rating-count">(128)</span>
+</div>
+<div class="product-footer">
+<p class="product-price">
+<span class="price-current">P 899</span>
+<span class="price-original">P 1,200</span>
+</p>
+<button aria-label="Add Modern Dining Chair to cart" class="btn-add-cart">
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</article>
+<article class="product-card">
+<div class="product-image-wrapper">
+<img alt="3-Seater Sofa" class="product-image" loading="lazy" src="images/products/sofa-1.jpg"/>
+<button aria-label="View in AR" class="ar-badge">
+<svg fill="currentColor" height="16" viewbox="0 0 24 24" width="16">
+<path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"></path>
+</svg>
+                            AR View
+                        </button>
+<button aria-label="Add to wishlist" class="wishlist-btn">
+<svg fill="none" height="20" stroke="currentColor" viewbox="0 0 24 24" width="20">
+<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+</svg>
+</button>
+</div>
+<div class="product-info">
+<h3 class="product-name">Outdoor Item 2</h3>
+<p class="product-description">Luxury fabric upholstery</p>
+<div class="product-rating">
+<span aria-label="Rating: 5 out of 5 stars" class="stars">★★★★★</span>
+<span class="rating-count">(89)</span>
+</div>
+<div class="product-footer">
+<p class="product-price">
+<span class="price-current">P 8,499</span>
+</p>
+<button aria-label="Add 3-Seater Sofa to cart" class="btn-add-cart">
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</article>
+<article class="product-card">
+<div class="product-image-wrapper">
+<img alt="Coffee Table" class="product-image" loading="lazy" src="images/products/table-1.jpg"/>
+<button aria-label="View in AR" class="ar-badge">
+<svg fill="currentColor" height="16" viewbox="0 0 24 24" width="16">
+<path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"></path>
+</svg>
+                            AR View
+                        </button>
+<button aria-label="Add to wishlist" class="wishlist-btn">
+<svg fill="none" height="20" stroke="currentColor" viewbox="0 0 24 24" width="20">
+<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+</svg>
+</button>
+</div>
+<div class="product-info">
+<h3 class="product-name">Outdoor Item 3</h3>
+<p class="product-description">Solid oak wood construction</p>
+<div class="product-rating">
+<span aria-label="Rating: 4 out of 5 stars" class="stars">★★★★☆</span>
+<span class="rating-count">(203)</span>
+</div>
+<div class="product-footer">
+<p class="product-price">
+<span class="price-current">P 2,299</span>
+<span class="price-original">P 2,999</span>
+</p>
+<button aria-label="Add Coffee Table to cart" class="btn-add-cart">
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</article>
+<article class="product-card">
+<div class="product-image-wrapper">
+<img alt="Queen Size Bed Frame" class="product-image" loading="lazy" src="images/products/bed-1.jpg"/>
+<button aria-label="View in AR" class="ar-badge">
+<svg fill="currentColor" height="16" viewbox="0 0 24 24" width="16">
+<path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"></path>
+</svg>
+                            AR View
+                        </button>
+<button aria-label="Add to wishlist" class="wishlist-btn">
+<svg fill="none" height="20" stroke="currentColor" viewbox="0 0 24 24" width="20">
+<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+</svg>
+</button>
+</div>
+<div class="product-info">
+<h3 class="product-name">Outdoor Item 4</h3>
+<p class="product-description">Includes storage drawers</p>
+<div class="product-rating">
+<span aria-label="Rating: 4.5 out of 5 stars" class="stars">★★★★☆</span>
+<span class="rating-count">(67)</span>
+</div>
+<div class="product-footer">
+<p class="product-price">
+<span class="price-current">P 6,999</span>
+</p>
+<button aria-label="Add Queen Size Bed Frame to cart" class="btn-add-cart">
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- AR/VR Feature Showcase -->
+<section aria-label="AR and VR features" class="ar-showcase">
+<div class="container">
+<div class="ar-content">
+<div class="ar-text">
+<h2>Visualize Before You Buy</h2>
+<p>See how furniture looks in your space with our AR technology. Walk through virtual showrooms in VR.</p>
+<ul class="feature-list">
+<li>
+<svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24">
+<polyline points="20 6 9 17 4 12"></polyline>
+</svg>
+                            View furniture in your actual room
+                        </li>
+<li>
+<svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24">
+<polyline points="20 6 9 17 4 12"></polyline>
+</svg>
+                            Accurate size and scale representation
+                        </li>
+<li>
+<svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24">
+<polyline points="20 6 9 17 4 12"></polyline>
+</svg>
+                            Virtual showroom tours available
+                        </li>
+</ul>
+<button class="btn btn-primary" id="launch-ar-modal">Launch AR Experience</button>
+</div>
+<div class="ar-demo">
+<img alt="AR furniture visualization demonstration" loading="lazy" src="images/ar-demo.jpg"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Choose Us -->
+<section aria-label="Why choose Furnmart" class="features">
+<div class="container">
+<h2 class="section-title">Why Choose Furnmart</h2>
+<div class="features-grid">
+<div class="feature-card">
+<div class="feature-icon">
+<svg fill="none" height="48" stroke="currentColor" viewbox="0 0 24 24" width="48">
+<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+</svg>
+</div>
+<h3>Quality Guarantee</h3>
+<p>5-year warranty on all furniture</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">
+<svg fill="none" height="48" stroke="currentColor" viewbox="0 0 24 24" width="48">
+<rect height="13" width="15" x="1" y="3"></rect>
+<polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+<circle cx="5.5" cy="18.5" r="2.5"></circle>
+<circle cx="18.5" cy="18.5" r="2.5"></circle>
+</svg>
+</div>
+<h3>Free Delivery</h3>
+<p>Within Gaborone &amp; Palapye</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">
+<svg fill="none" height="48" stroke="currentColor" viewbox="0 0 24 24" width="48">
+<circle cx="12" cy="12" r="10"></circle>
+<polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+</div>
+<h3>Easy Returns</h3>
+<p>30-day return policy</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">
+<svg fill="none" height="48" stroke="currentColor" viewbox="0 0 24 24" width="48">
+<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+</svg>
+</div>
+<h3>24/7 Support</h3>
+<p>Customer service always available</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="footer" role="contentinfo">
+<div class="container">
+<div class="footer-content">
+<div class="footer-section">
+<h4>About Furnmart</h4>
+<p>Botswana's leading furniture retailer, bringing quality home furnishings to families since 1998.</p>
+<div class="social-links">
+<a aria-label="Facebook" href="#"><svg fill="currentColor" height="24" viewbox="0 0 24 24" width="24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+<a aria-label="Instagram" href="#"><svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24"><rect height="20" rx="5" ry="5" width="20" x="2" y="2"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a>
+<a aria-label="Twitter" href="#"><svg fill="currentColor" height="24" viewbox="0 0 24 24" width="24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+</div>
+</div>
+<div class="footer-section">
+<h4>Customer Service</h4>
+<ul>
+<li><a href="#">Contact Us</a></li>
+<li><a href="#">Shipping Info</a></li>
+<li><a href="#">Returns</a></li>
+<li><a href="#">FAQ</a></li>
+<li><a href="#">Track Order</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h4>Quick Links</h4>
+<ul>
+<li><a href="#">About Us</a></li>
+<li><a href="#">Careers</a></li>
+<li><a href="#">Store Locations</a></li>
+<li><a href="#">Sustainability</a></li>
+<li><a href="#">Press</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h4>Newsletter</h4>
+<p>Subscribe for exclusive offers and updates</p>
+<form class="newsletter-form">
+<input aria-label="Email for newsletter" placeholder="Your email" required="" type="email"/>
+<button class="btn btn-primary" type="submit">Subscribe</button>
+</form>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2025 Furnmart Botswana. All rights reserved.</p>
+<div class="footer-links">
+<a href="#">Privacy Policy</a>
+<a href="#">Terms of Service</a>
+<a href="#">Accessibility</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- AR Modal -->
+<div aria-labelledby="ar-modal-title" aria-modal="true" class="modal" hidden="" id="ar-modal" role="dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h3 id="ar-modal-title">View in Your Space</h3>
+<button aria-label="Close AR viewer" class="modal-close">×</button>
+</div>
+<div class="modal-body">
+<model-viewer alt="3D model of furniture" ar="" ar-modes="webxr scene-viewer quick-look" camera-controls="" id="ar-viewer" shadow-intensity="1" src="models/chair.glb" style="width: 100%; height: 500px;">
+<button class="ar-button" slot="ar-button">
+                    View in AR
+                </button>
+</model-viewer>
+<div class="ar-instructions">
+<p>Point your camera at a flat surface to place the furniture</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Accessibility: Live Region for Dynamic Updates -->
+<div aria-atomic="true" aria-live="polite" class="sr-only"></div>
+<!-- JavaScript -->
+<script src="js/main.js"></script>
+
+<div class="cart-drawer" aria-hidden="true" role="dialog" aria-label="Shopping cart">
+  <div class="cart-backdrop"></div>
+  <div class="cart-panel">
+    <header class="cart-header">
+      <h2>My Cart</h2>
+      <button class="cart-close" aria-label="Close cart">&times;</button>
+    </header>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-empty" id="cart-empty" aria-live="polite" style="display:none; padding: 0 1.25rem 1rem;">Your cart is empty.</div>
+    <footer class="cart-footer">
+      <div class="cart-total"><span>Total:</span> <strong id="cart-total">P 0</strong></div>
+      <button class="btn-checkout">Checkout</button>
+    </footer>
+  </div>
+</div>
+<script>
+(function() {
+  const drawer = document.querySelector('.cart-drawer');
+  const backdrop = drawer ? drawer.querySelector('.cart-backdrop') : null;
+  const closeBtn = drawer ? drawer.querySelector('.cart-close') : null;
+  const cartBtn = document.querySelector('.cart-btn');
+  function openDrawer() {
+    if (!drawer) return;
+    drawer.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  }
+  function closeDrawer() {
+    if (!drawer) return;
+    drawer.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+  }
+  if (cartBtn) cartBtn.addEventListener('click', openDrawer);
+  if (backdrop) backdrop.addEventListener('click', closeDrawer);
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+
+  function renderCart() {
+    var itemsEl = document.getElementById('cart-items');
+    var totalEl = document.getElementById('cart-total');
+    var emptyEl = document.getElementById('cart-empty');
+    if (!itemsEl || !totalEl) return;
+    var cartObj = (typeof AppState !== 'undefined' && AppState) ? AppState : (window.AppState || { cart: [] });
+    var cart = Array.isArray(cartObj.cart) ? cartObj.cart : [];
+    itemsEl.innerHTML='';
+    var total = 0;
+    var totalItems = 0;
+    cart.forEach(function(item){
+      var priceNum = parseFloat(String(item.price).replace(/[^0-9.]/g,'')) || 0;
+      var row = document.createElement('div');
+      row.className = 'cart-item';
+      row.innerHTML = 
+      '<div class="ci-name">'+item.name+'</div>' +
+      '<div class="ci-qty-controls">' +
+        '<button class="ci-decr" data-name="'+item.name+'" aria-label="Decrease '+item.name+'">−</button>' +
+        '<input class="ci-qty-input" data-name="'+item.name+'" type="number" min="1" value="'+item.quantity+'" />' +
+        '<button class="ci-incr" data-name="'+item.name+'" aria-label="Increase '+item.name+'">+</button>' +
+      '</div>' +
+      '<div class="ci-price">P '+(priceNum*item.quantity).toFixed(2)+'</div>' +
+      '<button class="ci-remove" data-name="'+item.name+'" aria-label="Remove '+item.name+'">&times;</button>';
+      itemsEl.appendChild(row);
+      total += priceNum * item.quantity;
+      totalItems += item.quantity;
+    });
+    totalEl.textContent = 'P ' + total.toFixed(2);
+    if (emptyEl) emptyEl.style.display = totalItems === 0 ? 'block' : 'none';
+} 
+  const origAdd = window.addToCart;
+  window.addToCart = function(p) {
+    if (origAdd) origAdd(p);
+    renderCart();
+  }
+  renderCart();
+  document.addEventListener('cart:updated', renderCart);
+
+  // cart-items-handler: delegated remove
+  (function(){
+    var itemsEl = document.getElementById('cart-items');
+    if (!itemsEl) return;
+    // ci-qty-delegates
+    itemsEl.addEventListener('click', function(e){
+      var btn = e.target.closest('.ci-remove');
+      if (e.target.closest('.ci-incr')) {
+      var namePlus = e.target.closest('.ci-incr').getAttribute('data-name');
+      var item = (window.AppState||{cart:[]}).cart.find(i=>i.name===namePlus);
+      var next = (item ? item.quantity : 1) + 1;
+      if (window.setCartQuantity) window.setCartQuantity(namePlus, next);
+      return;
+    }
+    if (e.target.closest('.ci-decr')) {
+      var nameMinus = e.target.closest('.ci-decr').getAttribute('data-name');
+      var itemM = (window.AppState||{cart:[]}).cart.find(i=>i.name===nameMinus);
+      var nextM = Math.max(0, (itemM ? itemM.quantity : 1) - 1);
+      if (window.setCartQuantity) window.setCartQuantity(nameMinus, nextM);
+      return;
+    }
+    if (!btn) return;
+      var name = btn.getAttribute('data-name');
+      if (window.removeFromCart && name) window.removeFromCart(name);
+    });
+    // quantity input change
+  itemsEl.addEventListener('change', function(e){
+    var inp = e.target.closest('.ci-qty-input');
+    if (!inp) return;
+    var name = inp.getAttribute('data-name');
+    var val = parseInt(inp.value, 10);
+    if (isNaN(val) || val < 1) val = 1;
+    if (window.setCartQuantity) window.setCartQuantity(name, val);
+  });
+})();
+  // quantity input change
+  itemsEl.addEventListener('change', function(e){
+    var inp = e.target.closest('.ci-qty-input');
+    if (!inp) return;
+    var name = inp.getAttribute('data-name');
+    var val = parseInt(inp.value, 10);
+    if (isNaN(val) || val < 1) val = 1;
+    if (window.setCartQuantity) window.setCartQuantity(name, val);
+  });
+})();
+</script>
+
+</body>
+</html>
