@@ -205,6 +205,24 @@ function updateCartCount() {
     elements.cartBtn.setAttribute('aria-label', `Shopping cart (${totalItems} items)`);
 }
 
+// ============ Remove from Cart Functionality ============
+function removeFromCart(productName) {
+    // Find the index of the product in the cart based on its name
+    const index = AppState.cart.findIndex(item => item.name === productName);
+    if (index !== -1) {
+        // Remove the product from the cart array
+        AppState.cart.splice(index, 1);
+        // Update UI and storage
+        updateCartCount();
+        saveCartToStorage();
+        dispatchCartUpdated();
+        showNotification(`${productName} removed from cart`, 'info');
+        announceToScreenReader(`${productName} removed from cart`);
+    } else {
+        console.warn(`Item not found in cart: ${productName}`);
+    }
+}
+
 // ============ Wishlist Functionality ============
 function initWishlist() {
     if (!elements.wishlistBtns) return;
@@ -599,22 +617,38 @@ function cartDelegatedHandler(e){
     try {
         var card = target.closest('.product-card');
         var nameEl = card ? card.querySelector('.product-name') : document.querySelector('.product-title, .product-name');
-        var priceEl = card ? card.querySelector('.price-current, .price-main') : document.querySelector('.price-current, .price-main');
+        var priceEl = card ? card.querySelector('.price-current') : document.querySelector('.price-current');
         var name = nameEl ? nameEl.textContent.trim() : 'Product';
         var price = priceEl ? priceEl.textContent.trim() : 'P 0';
-        // Check if the addToCart function is available either globally or in window
-        var addCartFn = (typeof addToCart === 'function' ? addToCart : window.addToCart);
-        if (addCartFn) {
-            addCartFn({ name: name, price: price, quantity: 1 });
-            showNotification(`${name} added to cart!`, 'success');
-        } else {
-            console.warn('Add to cart function not found');
-        }
+        if (window.addToCart) window.addToCart({ name: name, price: price, quantity: 1 });
     } catch(err) {
         console.warn('Delegated add-to-cart failed', err);
     }
 }
 document.addEventListener('click', cartDelegatedHandler, false);
+
+// ============ Cart Removal & Slider Removal ============
+// Delegated event listener for remove button in cart drawer
+document.addEventListener('click', (e) => {
+    const removeBtn = e.target.closest('.ci-remove');
+    if (removeBtn) {
+        const productName = removeBtn.getAttribute('data-name');
+        console.log('Remove button clicked for:', productName);
+        if (productName && typeof removeFromCart === 'function') {
+            removeFromCart(productName);
+        }
+    }
+});
+
+// Function to remove quantity sliders from cart items (if desired)
+function removeSliders() {
+    setTimeout(() => {
+        document.querySelectorAll('.cart-item .ci-qty-controls').forEach(el => el.remove());
+    }, 50);
+}
+
+// Listen for cart updates to remove sliders
+document.addEventListener('cart:updated', removeSliders);
 
 // ============ Run on DOM Content Loaded ============
 if (document.readyState === 'loading') {
@@ -633,3 +667,6 @@ if (typeof module !== 'undefined' && module.exports) {
         closeARModal
     };
 }
+
+// Expose removeFromCart function to global scope to be accessible by event listeners
+window.removeFromCart = removeFromCart;
