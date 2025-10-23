@@ -362,6 +362,7 @@ SUS Score: 82/100 (Good to Excellent)
 - **Email**: NB22000934@biust.ac.bw
 - **Student ID**: 22000934
 - **Role**: Full Stack Development, HCI Research, Accessibility Implementation
+- 
 
 ## 🔒 Security Notes
 

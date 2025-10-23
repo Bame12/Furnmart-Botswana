@@ -17,7 +17,7 @@ const AppState = {
 const elements = {
     mobileMenuToggle: document.querySelector('.mobile-menu-toggle'),
     navLinks: document.querySelector('.nav-links'),
-    searchBtn: document.querySelectorAll('.icon-btn')[0],
+    searchBtn: document.querySelector('.search-toggle'),
     searchOverlay: document.querySelector('.search-overlay'),
     searchClose: document.querySelector('.search-close'),
     searchInput: document.querySelector('.search-input'),
