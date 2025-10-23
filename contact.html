@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Furnmart Botswana - Get in touch with us for furniture inquiries">
+    <title>Contact Us - Furnmart Botswana</title>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Header -->
+<header class="header" role="banner">
+    <nav class="navbar" role="navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="index.html" aria-label="Furnmart Botswana Home">
+                    <img src="images/icons/logo.svg" alt="Furnmart Botswana Logo" class="logo">
+                </a>
+            </div>
+
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="products-catalog.html" class="nav-link">Products</a></li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Rooms <span class="dropdown-icon">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Living Room</a></li>
+                        <li><a href="#">Bedroom</a></li>
+                        <li><a href="#">Dining Room</a></li>
+                        <li><a href="#">Office</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="nav-link">AR Showroom</a></li>
+                <li><a href="#" class="nav-link">Inspiration</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="icon-btn" aria-label="Search">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+                <button class="icon-btn" aria-label="User account">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </button>
+                <a href="cart.html" class="icon-btn cart-btn" aria-label="Shopping cart">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Breadcrumb -->
+<nav aria-label="Breadcrumb" class="breadcrumb-container">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li aria-current="page">Contact Us</li>
+        </ol>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main id="main-content" role="main">
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-header">
+                <h1>Get in Touch</h1>
+                <p>Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+            </div>
+
+            <div class="contact-layout">
+                <!-- Contact Form -->
+                <div class="contact-form-container">
+                    <form class="contact-form" id="contact-form" novalidate>
+                        <div class="form-group">
+                            <label for="name">Full Name <span class="required">*</span></label>
+                            <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    required
+                                    aria-required="true"
+                                    placeholder="Enter your full name">
+                            <span class="error-message" role="alert"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    required
+                                    aria-required="true"
+                                    placeholder="your.email@example.com">
+                            <span class="error-message" role="alert"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    placeholder="+267 XX XXX XXX">
+                            <span class="error-message" role="alert"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject <span class="required">*</span></label>
+                            <select id="subject" name="subject" required aria-required="true">
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="product">Product Information</option>
+                                <option value="order">Order Status</option>
+                                <option value="delivery">Delivery Question</option>
+                                <option value="complaint">Complaint</option>
+                                <option value="feedback">Feedback</option>
+                            </select>
+                            <span class="error-message" role="alert"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message <span class="required">*</span></label>
+                            <textarea
+                                    id="message"
+                                    name="message"
+                                    rows="6"
+                                    required
+                                    aria-required="true"
+                                    placeholder="Tell us how we can help you..."></textarea>
+                            <span class="error-message" role="alert"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="newsletter" id="newsletter">
+                                <span>Subscribe to our newsletter for exclusive offers</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-submit">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Information -->
+                <aside class="contact-info" role="complementary">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <div class="info-content">
+                            <h3>Visit Our Showroom</h3>
+                            <p>Main Mall, Gaborone<br>Botswana</p>
+                            <p class="info-hours">Mon-Fri: 8:00 AM - 6:00 PM<br>Sat: 9:00 AM - 5:00 PM<br>Sun: Closed</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </div>
+                        <div class="info-content">
+                            <h3>Call Us</h3>
+                            <p><a href="tel:+2673123456">+267 312 3456</a></p>
+                            <p><a href="tel:+2677123456">+267 712 3456</a> (Mobile)</p>
+                            <p class="info-hours">Available during business hours</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <div class="info-content">
+                            <h3>Email Us</h3>
+                            <p><a href="mailto:info@furnmart.co.bw">info@furnmart.co.bw</a></p>
+                            <p><a href="mailto:support@furnmart.co.bw">support@furnmart.co.bw</a></p>
+                            <p class="info-hours">We respond within 24 hours</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </div>
+                        <div class="info-content">
+                            <h3>Live Chat</h3>
+                            <p>Chat with our support team</p>
+                            <button class="btn btn-secondary btn-sm" style="margin-top: var(--spacing-sm);">Start Chat</button>
+                        </div>
+                    </div>
+
+                    <div class="social-connect">
+                        <h3>Connect With Us</h3>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook" class="social-link">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                </svg>
+                            </a>
+                            <a href="#" aria-label="Instagram" class="social-link">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                </svg>
+                            </a>
+                            <a href="#" aria-label="Twitter" class="social-link">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                                </svg>
+                            </a>
+                            <a href="#" aria-label="WhatsApp" class="social-link">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    <details class="faq-item">
+                        <summary>What are your delivery options?</summary>
+                        <p>We offer free delivery within Gaborone and Palapye. For other areas in Botswana, delivery fees vary based on distance. Standard delivery takes 3-5 business days.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Do you offer assembly services?</summary>
+                        <p>Yes! Professional assembly is available for P 150 per item. Our team will assemble your furniture and remove all packaging materials.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>What is your return policy?</summary>
+                        <p>We offer a 30-day return policy on all furniture. Items must be in original condition with all packaging intact. Return shipping is free for defective items.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>How does AR visualization work?</summary>
+                        <p>AR (Augmented Reality) lets you see furniture in your actual space using your phone's camera. Simply tap the "AR View" button on any product and follow the on-screen instructions.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Do you offer financing options?</summary>
+                        <p>Yes, we partner with several financial institutions to offer flexible payment plans. Contact us for more details on financing options.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Can I customize furniture?</summary>
+                        <p>We offer customization options for select items including fabric choices, colors, and dimensions. Visit our showroom or contact us to discuss your requirements.</p>
+                    </details>
+                </div>
+            </section>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="footer" role="contentinfo">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About Furnmart</h4>
+                <p>Botswana's leading furniture retailer since 1998.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                    <a href="#" aria-label="Instagram"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect></svg></a>
+                    <a href="#" aria-label="Twitter"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Customer Service</h4>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Store Locations</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p>Subscribe for exclusive offers</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Furnmart Botswana. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+<script src="js/main.js"></script>
+<script src="js/contact.js"></script>
+</body>
+</html>

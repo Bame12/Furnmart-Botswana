@@ -1,0 +1,358 @@
+/**
+ * Contact Page Styles
+ * Furnmart Botswana
+ */
+
+/* ============ Contact Section ============ */
+.contact-section {
+    padding: var(--spacing-2xl) 0;
+}
+
+.contact-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto var(--spacing-2xl);
+}
+
+.contact-header h1 {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-md);
+}
+
+.contact-header p {
+    font-size: var(--font-size-lg);
+    color: var(--medium-gray);
+}
+
+/* ============ Contact Layout ============ */
+.contact-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-2xl);
+    margin-bottom: var(--spacing-2xl);
+}
+
+/* ============ Contact Form ============ */
+.contact-form-container {
+    background: var(--white);
+    padding: var(--spacing-2xl);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--light-gray);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.form-group label {
+    font-weight: 500;
+    font-size: var(--font-size-sm);
+    color: var(--dark-gray);
+}
+
+.required {
+    color: var(--error);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px 16px;
+    border: 2px solid var(--light-gray);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-base);
+    font-family: inherit;
+    transition: border-color var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+    border-color: var(--error);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.error-message {
+    color: var(--error);
+    font-size: var(--font-size-sm);
+    display: none;
+}
+
+.error-message.visible {
+    display: block;
+}
+
+/* Checkbox */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+/* Submit Button */
+.btn-submit {
+    margin-top: var(--spacing-md);
+    padding: 16px 32px;
+    font-size: var(--font-size-lg);
+}
+
+.btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ============ Contact Info Sidebar ============ */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.info-card {
+    background: var(--lighter-gray);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.info-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    background: var(--primary-color);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-icon svg {
+    stroke-width: 2;
+}
+
+.info-content h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-sm);
+}
+
+.info-content p {
+    color: var(--dark-gray);
+    margin-bottom: var(--spacing-xs);
+}
+
+.info-content p:last-child {
+    margin-bottom: 0;
+}
+
+.info-content a {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.info-content a:hover {
+    text-decoration: underline;
+}
+
+.info-hours {
+    font-size: var(--font-size-sm);
+    color: var(--medium-gray) !important;
+    margin-top: var(--spacing-sm);
+}
+
+/* Social Connect */
+.social-connect {
+    background: var(--primary-light);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    text-align: center;
+}
+
+.social-connect h3 {
+    margin-bottom: var(--spacing-md);
+}
+
+.social-connect .social-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.social-link {
+    width: 48px;
+    height: 48px;
+    background: var(--primary-color);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.social-link:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* ============ FAQ Section ============ */
+.faq-section {
+    margin-top: var(--spacing-2xl);
+    padding-top: var(--spacing-2xl);
+    border-top: 2px solid var(--light-gray);
+}
+
+.faq-section h2 {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.faq-item {
+    background: var(--lighter-gray);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--light-gray);
+    transition: all var(--transition-fast);
+}
+
+.faq-item:hover {
+    box-shadow: var(--shadow-sm);
+}
+
+.faq-item summary {
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--primary-color);
+    transition: transform var(--transition-fast);
+}
+
+.faq-item[open] summary::after {
+    content: '−';
+}
+
+.faq-item p {
+    margin-top: var(--spacing-md);
+    color: var(--dark-gray);
+    line-height: 1.8;
+}
+
+/* ============ Form Success Message ============ */
+.success-message {
+    display: none;
+    background: var(--success);
+    color: var(--white);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.success-message.visible {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============ Responsive Design ============ */
+@media (max-width: 1024px) {
+    .contact-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-info {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-form-container {
+        padding: var(--spacing-lg);
+    }
+
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .info-icon {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-header h1 {
+        font-size: var(--font-size-2xl);
+    }
+
+    .contact-form-container {
+        padding: var(--spacing-md);
+    }
+
+    .btn-submit {
+        width: 100%;
+    }
+}

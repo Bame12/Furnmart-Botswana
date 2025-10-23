@@ -1,0 +1,334 @@
+/**
+ * Catalog Page Styles
+ * Furnmart Botswana
+ */
+
+/* ============ Catalog Header ============ */
+.catalog-header {
+    text-align: center;
+    padding: var(--spacing-2xl) 0;
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--white) 100%);
+}
+
+.catalog-header h1 {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-sm);
+}
+
+.catalog-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--medium-gray);
+}
+
+/* ============ Catalog Layout ============ */
+.catalog-section {
+    padding: var(--spacing-2xl) 0;
+}
+
+.catalog-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--spacing-2xl);
+    align-items: start;
+}
+
+/* ============ Filters Sidebar ============ */
+.filters-sidebar {
+    position: sticky;
+    top: 100px;
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+}
+
+.filters-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.filters-header h2 {
+    font-size: var(--font-size-xl);
+    margin: 0;
+}
+
+.btn-clear-filters {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.btn-clear-filters:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* Filter Groups */
+.filter-group {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.filter-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.filter-group h3 {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-xs) 0;
+    transition: color var(--transition-fast);
+}
+
+.checkbox-label:hover {
+    color: var(--primary-color);
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.checkbox-label .count {
+    margin-left: auto;
+    color: var(--medium-gray);
+    font-size: var(--font-size-xs);
+}
+
+/* ============ Catalog Main ============ */
+.catalog-main {
+    min-width: 0; /* Prevent grid overflow */
+}
+
+.catalog-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-md);
+    background: var(--lighter-gray);
+    border-radius: var(--border-radius);
+}
+
+.results-info {
+    font-size: var(--font-size-sm);
+    color: var(--dark-gray);
+    font-weight: 500;
+}
+
+.view-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.sort-select {
+    padding: 8px 12px;
+    border: 1px solid var(--light-gray);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    background: var(--white);
+    transition: border-color var(--transition-fast);
+}
+
+.sort-select:hover {
+    border-color: var(--primary-color);
+}
+
+.sort-select:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.view-toggle {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.view-btn {
+    padding: 8px;
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.view-btn:hover {
+    background: var(--lighter-gray);
+}
+
+.view-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* ============ Pagination ============ */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-2xl);
+    padding-top: var(--spacing-xl);
+}
+
+.pagination-btn {
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.pagination-btn.active {
+    background: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination-dots {
+    color: var(--medium-gray);
+}
+
+/* ============ List View ============ */
+.products-grid.list-view {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.products-grid.list-view .product-card {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: var(--spacing-lg);
+}
+
+.products-grid.list-view .product-image-wrapper {
+    aspect-ratio: 1;
+}
+
+.products-grid.list-view .product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.products-grid.list-view .product-footer {
+    margin-top: auto;
+}
+
+/* ============ Responsive Design ============ */
+@media (max-width: 1024px) {
+    .catalog-layout {
+        grid-template-columns: 240px 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    .filters-sidebar {
+        padding: var(--spacing-lg);
+    }
+}
+
+@media (max-width: 768px) {
+    .catalog-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100vh;
+        overflow-y: auto;
+        z-index: var(--z-fixed);
+        transition: left var(--transition-base);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .filters-sidebar.active {
+        left: 0;
+    }
+
+    .catalog-controls {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        align-items: stretch;
+    }
+
+    .view-controls {
+        justify-content: space-between;
+    }
+
+    .products-grid.list-view .product-card {
+        grid-template-columns: 120px 1fr;
+        gap: var(--spacing-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .view-toggle {
+        display: none;
+    }
+
+    .pagination-btn {
+        min-width: 36px;
+        height: 36px;
+    }
+
+    .products-grid.list-view .product-card {
+        grid-template-columns: 1fr;
+    }
+}

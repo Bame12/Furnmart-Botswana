@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed - Furnmart Botswana</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .confirmation-page { padding: var(--spacing-2xl) 0; min-height: 60vh; }
+        .confirmation-container { max-width: 800px; margin: 0 auto; text-align: center; }
+        .success-icon { width: 100px; height: 100px; margin: 0 auto var(--spacing-xl); background: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; animation: scaleIn 0.5s ease; }
+        @keyframes scaleIn { from { transform: scale(0); } to { transform: scale(1); } }
+        .order-number { background: var(--lighter-gray); padding: var(--spacing-lg); border-radius: var(--border-radius-lg); margin: var(--spacing-2xl) 0; }
+        .order-number h2 { font-size: var(--font-size-2xl); color: var(--primary-color); margin-bottom: var(--spacing-sm); }
+        .order-details { background: var(--white); padding: var(--spacing-xl); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm); text-align: left; margin: var(--spacing-2xl) 0; }
+        .detail-row { display: flex; justify-content: space-between; padding: var(--spacing-md) 0; border-bottom: 1px solid var(--light-gray); }
+        .detail-row:last-child { border-bottom: none; }
+        .actions { display: flex; gap: var(--spacing-md); justify-content: center; margin-top: var(--spacing-2xl); flex-wrap: wrap; }
+        @media (max-width: 768px) { .actions { flex-direction: column; } }
+    </style>
+</head>
+<body>
+<header class="header">
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="index.html"><img src="images/icons/logo.svg" alt="Furnmart Logo" class="logo"></a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="confirmation-page">
+        <div class="container">
+            <div class="confirmation-container">
+                <div class="success-icon">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+
+                <h1>Order Confirmed!</h1>
+                <p style="font-size: var(--font-size-lg); color: var(--medium-gray); margin-top: var(--spacing-md);">
+                    Thank you for your purchase. Your order has been successfully placed.
+                </p>
+
+                <div class="order-number">
+                    <h2>Order #FM-2025-10234</h2>
+                    <p style="color: var(--medium-gray);">Confirmation sent to your email</p>
+                </div>
+
+                <div class="order-details">
+                    <h3 style="margin-bottom: var(--spacing-lg);">Order Details</h3>
+                    <div class="detail-row">
+                        <span style="color: var(--medium-gray);">Order Date</span>
+                        <span style="font-weight: 600;">October 22, 2025</span>
+                    </div>
+                    <div class="detail-row">
+                        <span style="color: var(--medium-gray);">Estimated Delivery</span>
+                        <span style="font-weight: 600;">October 25-27, 2025</span>
+                    </div>
+                    <div class="detail-row">
+                        <span style="color: var(--medium-gray);">Delivery Address</span>
+                        <span style="font-weight: 600; text-align: right;">Plot 123, Gaborone</span>
+                    </div>
+                    <div class="detail-row">
+                        <span style="color: var(--medium-gray);">Payment Method</span>
+                        <span style="font-weight: 600;">Credit Card (****1234)</span>
+                    </div>
+                    <div class="detail-row" style="font-size: var(--font-size-xl); margin-top: var(--spacing-md); padding-top: var(--spacing-md); border-top: 2px solid var(--light-gray);">
+                        <span>Total Paid</span>
+                        <span style="font-weight: 700; color: var(--primary-color);">P 4,589</span>
+                    </div>
+                </div>
+
+                <div style="background: var(--primary-light); padding: var(--spacing-lg); border-radius: var(--border-radius-lg); margin: var(--spacing-xl) 0;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: var(--primary-color); margin-bottom: var(--spacing-sm);">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <p style="font-weight: 600; margin-bottom: var(--spacing-xs);">Track Your Order</p>
+                    <p style="font-size: var(--font-size-sm); color: var(--dark-gray);">We'll send you updates via email and SMS</p>
+                </div>
+
+                <div class="actions">
+                    <a href="#" class="btn btn-primary">Track Order</a>
+                    <a href="products-catalog.html" class="btn btn-secondary">Continue Shopping</a>
+                    <button onclick="window.print()" class="btn btn-secondary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                            <rect x="6" y="14" width="12" height="8"></rect>
+                        </svg>
+                        Print Receipt
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2025 Furnmart Botswana. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

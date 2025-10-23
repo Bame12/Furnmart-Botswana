@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Furnmart Botswana</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .checkout-page { padding: var(--spacing-2xl) 0; }
+        .steps-indicator { display: flex; justify-content: center; gap: var(--spacing-xl); margin-bottom: var(--spacing-2xl); }
+        .step { display: flex; align-items: center; gap: var(--spacing-sm); color: var(--medium-gray); }
+        .step-number { width: 36px; height: 36px; border-radius: 50%; background: var(--light-gray); display: flex; align-items: center; justify-content: center; font-weight: 600; }
+        .step.active { color: var(--primary-color); }
+        .step.active .step-number { background: var(--primary-color); color: var(--white); }
+        .step.completed .step-number { background: var(--success); color: var(--white); }
+
+        .checkout-container { display: grid; grid-template-columns: 1.5fr 1fr; gap: var(--spacing-2xl); }
+        .checkout-form { background: var(--white); padding: var(--spacing-xl); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm); }
+        .form-section { margin-bottom: var(--spacing-2xl); }
+        .form-section h2 { margin-bottom: var(--spacing-lg); font-size: var(--font-size-xl); }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); }
+        .form-group { margin-bottom: var(--spacing-md); }
+        .form-group label { display: block; margin-bottom: var(--spacing-xs); font-weight: 500; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid var(--light-gray); border-radius: var(--border-radius); font-family: inherit; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: 2px solid var(--primary-color); border-color: var(--primary-color); }
+        .form-group.full-width { grid-column: 1 / -1; }
+
+        .payment-methods { display: flex; gap: var(--spacing-md); margin-top: var(--spacing-md); }
+        .payment-option { flex: 1; padding: var(--spacing-md); border: 2px solid var(--light-gray); border-radius: var(--border-radius); cursor: pointer; text-align: center; transition: all var(--transition-fast); }
+        .payment-option:hover { border-color: var(--primary-color); }
+        .payment-option.selected { border-color: var(--primary-color); background: var(--primary-light); }
+        .payment-option input[type="radio"] { display: none; }
+
+        .order-summary-checkout { background: var(--white); padding: var(--spacing-xl); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm); position: sticky; top: 100px; height: fit-content; }
+        .summary-item { display: flex; gap: var(--spacing-md); padding: var(--spacing-md); border-bottom: 1px solid var(--light-gray); }
+        .summary-item img { width: 80px; height: 80px; object-fit: cover; border-radius: var(--border-radius); }
+        .summary-item-details { flex: 1; }
+        .summary-totals { margin-top: var(--spacing-lg); }
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: var(--spacing-md); }
+        .summary-row.total { font-size: var(--font-size-xl); font-weight: 700; padding-top: var(--spacing-md); border-top: 2px solid var(--light-gray); }
+
+        .terms-checkbox { display: flex; gap: var(--spacing-sm); align-items: flex-start; margin: var(--spacing-lg) 0; }
+        .terms-checkbox input { margin-top: 4px; }
+
+        @media (max-width: 1024px) {
+            .checkout-container { grid-template-columns: 1fr; }
+            .form-grid { grid-template-columns: 1fr; }
+            .payment-methods { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="header">
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="index.html"><img src="images/icons/logo.svg" alt="Furnmart Logo" class="logo"></a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main id="main-content">
+    <section class="checkout-page">
+        <div class="container">
+            <h1>Checkout</h1>
+
+            <!-- Progress Steps -->
+            <div class="steps-indicator">
+                <div class="step completed">
+                    <div class="step-number">✓</div>
+                    <span>Cart</span>
+                </div>
+                <div class="step active">
+                    <div class="step-number">2</div>
+                    <span>Information</span>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <span>Payment</span>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <span>Confirmation</span>
+                </div>
+            </div>
+
+            <div class="checkout-container">
+                <!-- Checkout Form -->
+                <div class="checkout-form">
+                    <!-- Delivery Information -->
+                    <div class="form-section">
+                        <h2>Delivery Information</h2>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="first-name">First Name *</label>
+                                <input type="text" id="first-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name">Last Name *</label>
+                                <input type="text" id="last-name" required>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" required>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="address">Street Address *</label>
+                                <input type="text" id="address" placeholder="House number and street name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City *</label>
+                                <select id="city" required>
+                                    <option value="">Select city</option>
+                                    <option value="gaborone">Gaborone</option>
+                                    <option value="francistown">Francistown</option>
+                                    <option value="maun">Maun</option>
+                                    <option value="palapye">Palapye</option>
+                                    <option value="molepolole">Molepolole</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="postal">Postal Code</label>
+                                <input type="text" id="postal">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="notes">Delivery Notes (Optional)</label>
+                                <textarea id="notes" rows="3" placeholder="Any special instructions for delivery?"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="form-section">
+                        <h2>Payment Method</h2>
+                        <p style="color: var(--medium-gray); margin-bottom: var(--spacing-md);">This is a prototype - no actual payment will be processed</p>
+
+                        <div class="payment-methods">
+                            <label class="payment-option selected">
+                                <input type="radio" name="payment" value="card" checked>
+                                <div>
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="margin-bottom: var(--spacing-xs);"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                                    <p style="font-weight: 600; margin: 0;">Credit Card</p>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="mobile">
+                                <div>
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="margin-bottom: var(--spacing-xs);"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                                    <p style="font-weight: 600; margin: 0;">Mobile Money</p>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="cash">
+                                <div>
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="margin-bottom: var(--spacing-xs);"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                                    <p style="font-weight: 600; margin: 0;">Cash on Delivery</p>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div id="card-details" style="margin-top: var(--spacing-xl);">
+                            <div class="form-group">
+                                <label for="card-number">Card Number</label>
+                                <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="expiry">Expiry Date</label>
+                                    <input type="text" id="expiry" placeholder="MM/YY">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cvv">CVV</label>
+                                    <input type="text" id="cvv" placeholder="123">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <label class="terms-checkbox">
+                        <input type="checkbox" required>
+                        <span>I agree to the <a href="#" style="color: var(--primary-color);">Terms & Conditions</a> and <a href="#" style="color: var(--primary-color);">Privacy Policy</a></span>
+                    </label>
+
+                    <button class="btn btn-primary btn-large" style="width: 100%;">Place Order</button>
+                    <a href="cart.html" style="display: block; text-align: center; margin-top: var(--spacing-md); color: var(--medium-gray);">← Back to Cart</a>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary-checkout">
+                    <h2>Order Summary</h2>
+
+                    <div style="margin-top: var(--spacing-lg);">
+                        <div class="summary-item">
+                            <img src="images/products/chair-1.jpg" alt="Modern Dining Chair">
+                            <div class="summary-item-details">
+                                <p style="font-weight: 600; margin-bottom: 4px;">Modern Dining Chair</p>
+                                <p style="font-size: var(--font-size-sm); color: var(--medium-gray);">Beige × 2</p>
+                                <p style="font-weight: 600; margin-top: 4px;">P 1,798</p>
+                            </div>
+                        </div>
+
+                        <div class="summary-item">
+                            <img src="images/products/table-1.jpg" alt="Coffee Table">
+                            <div class="summary-item-details">
+                                <p style="font-weight: 600; margin-bottom: 4px;">Coffee Table</p>
+                                <p style="font-size: var(--font-size-sm); color: var(--medium-gray);">Oak × 1</p>
+                                <p style="font-weight: 600; margin-top: 4px;">P 2,299</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="summary-totals">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span>P 4,097</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Delivery</span>
+                            <span style="color: var(--success);">FREE</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>VAT (12%)</span>
+                            <span>P 492</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span>P 4,589</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: var(--lighter-gray); border-radius: var(--border-radius); text-align: center;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="vertical-align: middle; color: var(--success);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        <p style="font-size: var(--font-size-sm); color: var(--dark-gray); margin: var(--spacing-xs) 0 0;">Secure Checkout - Your information is protected</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2025 Furnmart Botswana. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+    // Payment method switching
+    document.querySelectorAll('.payment-option').forEach(option => {
+        option.addEventListener('click', function() {
+            document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+            this.classList.add('selected');
+            const radio = this.querySelector('input[type="radio"]');
+            radio.checked = true;
+
+            // Show/hide card details
+            const cardDetails = document.getElementById('card-details');
+            if (radio.value === 'card') {
+                cardDetails.style.display = 'block';
+            } else {
+                cardDetails.style.display = 'none';
+            }
+        });
+    });
+</script>
+</body>
+</html>
