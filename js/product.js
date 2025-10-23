@@ -8,11 +8,12 @@ const ProductState = {
     selectedColor: 'Beige',
     selectedQuantity: 1,
     currentImageIndex: 0,
+    // FIXED: Using existing images
     images: [
         'images/products/chair-1.jpg',
-        'images/products/chair-1-side.jpg',
-        'images/products/chair-1-back.jpg',
-        'images/products/chair-1-detail.jpg'
+        'images/products/chair-2.jpg',
+        'images/products/chair-3.jpg',
+        'images/products/chair-4.jpg'
     ]
 };
 
@@ -82,13 +83,24 @@ function initImageGallery() {
 function changeMainImage(index) {
     ProductState.currentImageIndex = index;
 
-    // Update main image
+    // Update main image with loading state
     if (productElements.mainImage) {
         productElements.mainImage.style.opacity = '0';
-        setTimeout(() => {
+
+        // Use placeholder while loading
+        const newImage = new Image();
+        newImage.src = ProductState.images[index];
+
+        newImage.onload = () => {
             productElements.mainImage.src = ProductState.images[index];
             productElements.mainImage.style.opacity = '1';
-        }, 150);
+        };
+
+        newImage.onerror = () => {
+            // Fallback to placeholder
+            productElements.mainImage.src = `https://placehold.co/600x600/0051A5/FFFFFF?text=Product+Image`;
+            productElements.mainImage.style.opacity = '1';
+        };
     }
 
     // Update active thumbnail
@@ -131,7 +143,6 @@ function selectColor(swatch) {
     swatch.setAttribute('aria-checked', 'true');
 
     announceToScreenReader(`${colorName} selected`);
-    console.log('Color selected:', colorName);
 }
 
 // ============ Quantity Management ============
@@ -216,8 +227,7 @@ function addProductToCart() {
     if (typeof addToCart === 'function') {
         addToCart(product);
     } else {
-        // Fallback for standalone testing
-        console.log('Product added to cart:', product);
+        // Fallback notification
         showNotification(`${product.quantity}x ${product.name} (${product.color}) added to cart!`, 'success');
     }
 
@@ -305,12 +315,39 @@ function init360View() {
 }
 
 function open360Viewer() {
-    // For prototype: show modal with 360 view placeholder
-    showNotification('360° View feature - Rotate to see all angles', 'info');
+    showNotification('360° View - Rotate product to see all angles', 'info');
     announceToScreenReader('360 degree view activated');
+}
 
-    // In production, this would initialize a 360 viewer library
-    console.log('360° view opened');
+// ============ AR View with Model Check ============
+function initARView() {
+    if (!productElements.viewArBtn) return;
+
+    productElements.viewArBtn.addEventListener('click', () => {
+        // Check if AR model exists
+        checkARModelAvailability();
+    });
+}
+
+function checkARModelAvailability() {
+    const modelPath = 'models/chair.glb';
+
+    fetch(modelPath, { method: 'HEAD' })
+        .then(response => {
+            if (response.ok && response.headers.get('content-length') > 0) {
+                // Model exists, open AR modal
+                if (typeof openARModal === 'function') {
+                    openARModal('Modern Dining Chair');
+                }
+            } else {
+                // Model not available
+                showNotification('AR feature coming soon! 3D model loading...', 'info');
+            }
+        })
+        .catch(() => {
+            // Prototype mode
+            showNotification('AR Prototype - 3D model will be available in production', 'info');
+        });
 }
 
 // ============ Zoom on Hover ============
@@ -385,12 +422,11 @@ function updatePriceDisplay() {
     const priceElement = document.querySelector('.price-main');
     if (!priceElement) return;
 
-    const basePrice = 899; // Base price in Pula
+    const basePrice = 899;
     const quantity = ProductState.selectedQuantity;
     const total = basePrice * quantity;
 
-    // For prototype: just show in console
-    console.log(`Total: P ${total.toLocaleString()} (${quantity}x P ${basePrice})`);
+    // Could update a total display element here in production
 }
 
 // ============ Utility: Notification ============
@@ -434,24 +470,25 @@ function announceToScreenReader(message) {
 
 // ============ Initialize Product Page ============
 function initProductPage() {
-    console.log('Product page initialized');
+    try {
+        initImageGallery();
+        initColorSelection();
+        initQuantitySelector();
+        initAddToCart();
+        initTabs();
+        init360View();
+        initARView();
+        initImageZoom();
+        initReviewHelpful();
+        initScrollToReviews();
 
-    initImageGallery();
-    initColorSelection();
-    initQuantitySelector();
-    initAddToCart();
-    initTabs();
-    init360View();
-    initImageZoom();
-    initReviewHelpful();
-    initScrollToReviews();
-
-    // Add smooth transitions to main image
-    if (productElements.mainImage) {
-        productElements.mainImage.style.transition = 'opacity 0.3s ease';
+        // Add smooth transitions to main image
+        if (productElements.mainImage) {
+            productElements.mainImage.style.transition = 'opacity 0.3s ease';
+        }
+    } catch (error) {
+        console.error('Error initializing product page:', error);
     }
-
-    console.log('All product features initialized');
 }
 
 // ============ Run on DOM Ready ============

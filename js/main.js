@@ -1,6 +1,7 @@
 /**
  * Furnmart Botswana - Main JavaScript
  * Handles interactivity, AR features, and accessibility enhancements
+ * Production Version - v1.0.0
  */
 
 // ============ State Management ============
@@ -16,7 +17,7 @@ const AppState = {
 const elements = {
     mobileMenuToggle: document.querySelector('.mobile-menu-toggle'),
     navLinks: document.querySelector('.nav-links'),
-    searchBtn: document.querySelectorAll('.icon-btn')[0], // First icon button is search
+    searchBtn: document.querySelectorAll('.icon-btn')[0],
     searchOverlay: document.querySelector('.search-overlay'),
     searchClose: document.querySelector('.search-close'),
     searchInput: document.querySelector('.search-input'),
@@ -32,6 +33,30 @@ const elements = {
     arBadges: document.querySelectorAll('.ar-badge')
 };
 
+// ============ Error Handling ============
+function handleError(error, context = '') {
+    console.error(`Error in ${context}:`, error);
+    // In production, send to error tracking service like Sentry
+}
+
+// ============ Loading States ============
+function showLoading() {
+    const loader = document.createElement('div');
+    loader.className = 'loading-spinner';
+    loader.id = 'app-loader';
+    loader.innerHTML = '<div class="spinner"></div>';
+    loader.setAttribute('role', 'status');
+    loader.setAttribute('aria-label', 'Loading');
+    document.body.appendChild(loader);
+}
+
+function hideLoading() {
+    const loader = document.getElementById('app-loader');
+    if (loader) {
+        loader.remove();
+    }
+}
+
 // ============ Mobile Menu Toggle ============
 function initMobileMenu() {
     if (!elements.mobileMenuToggle || !elements.navLinks) return;
@@ -41,9 +66,15 @@ function initMobileMenu() {
         elements.navLinks.classList.toggle('active');
         elements.mobileMenuToggle.setAttribute('aria-expanded', AppState.isMenuOpen);
 
+        // Prevent body scroll when menu is open
+        document.body.style.overflow = AppState.isMenuOpen ? 'hidden' : '';
+
         // Accessibility: Trap focus within menu when open
         if (AppState.isMenuOpen) {
             elements.navLinks.querySelector('a').focus();
+            trapFocus(elements.navLinks);
+        } else {
+            releaseFocus();
         }
     });
 
@@ -55,6 +86,7 @@ function initMobileMenu() {
             AppState.isMenuOpen = false;
             elements.navLinks.classList.remove('active');
             elements.mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
         }
     });
 
@@ -65,8 +97,42 @@ function initMobileMenu() {
             elements.navLinks.classList.remove('active');
             elements.mobileMenuToggle.setAttribute('aria-expanded', 'false');
             elements.mobileMenuToggle.focus();
+            document.body.style.overflow = '';
         }
     });
+}
+
+// ============ Focus Trap for Modals ============
+let focusTrapHandler = null;
+
+function trapFocus(element) {
+    const focusableElements = element.querySelectorAll(
+        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    focusTrapHandler = (e) => {
+        if (e.key === 'Tab') {
+            if (e.shiftKey && document.activeElement === firstElement) {
+                e.preventDefault();
+                lastElement.focus();
+            } else if (!e.shiftKey && document.activeElement === lastElement) {
+                e.preventDefault();
+                firstElement.focus();
+            }
+        }
+    };
+
+    element.addEventListener('keydown', focusTrapHandler);
+}
+
+function releaseFocus() {
+    if (focusTrapHandler && elements.navLinks) {
+        elements.navLinks.removeEventListener('keydown', focusTrapHandler);
+        focusTrapHandler = null;
+    }
 }
 
 // ============ Search Functionality ============
@@ -82,7 +148,9 @@ function initSearch() {
     });
 
     // Close search
-    elements.searchClose.addEventListener('click', closeSearch);
+    if (elements.searchClose) {
+        elements.searchClose.addEventListener('click', closeSearch);
+    }
 
     // Close on escape
     document.addEventListener('keydown', (e) => {
@@ -91,25 +159,29 @@ function initSearch() {
         }
     });
 
-    // Search functionality (prototype - logs to console)
-    elements.searchInput.addEventListener('input', debounce((e) => {
-        const query = e.target.value.trim();
-        if (query.length >= 3) {
-            performSearch(query);
-        }
-    }, 300));
+    // Search functionality
+    if (elements.searchInput) {
+        elements.searchInput.addEventListener('input', debounce((e) => {
+            const query = e.target.value.trim();
+            if (query.length >= 3) {
+                performSearch(query);
+            }
+        }, 300));
+    }
 }
 
 function closeSearch() {
     AppState.isSearchOpen = false;
-    elements.searchOverlay.setAttribute('aria-hidden', 'true');
-    elements.searchOverlay.style.transform = 'translateY(-100%)';
-    elements.searchBtn.focus();
+    if (elements.searchOverlay) {
+        elements.searchOverlay.setAttribute('aria-hidden', 'true');
+        elements.searchOverlay.style.transform = 'translateY(-100%)';
+    }
+    if (elements.searchBtn) {
+        elements.searchBtn.focus();
+    }
 }
 
 function performSearch(query) {
-    // Prototype: Log search query
-    console.log('Searching for:', query);
     // In production, this would make an API call
     announceToScreenReader(`Searching for ${query}`);
 }
@@ -121,8 +193,10 @@ function initCart() {
     elements.addToCartBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             const productCard = e.target.closest('.product-card');
-            const productName = productCard.querySelector('.product-name').textContent;
-            const productPrice = productCard.querySelector('.price-current').textContent;
+            if (!productCard) return;
+
+            const productName = productCard.querySelector('.product-name')?.textContent || 'Product';
+            const productPrice = productCard.querySelector('.price-current')?.textContent || 'P 0';
 
             addToCart({
                 name: productName,
@@ -134,28 +208,62 @@ function initCart() {
 }
 
 function addToCart(product) {
-    // Check if product already exists in cart
-    const existingProduct = AppState.cart.find(item => item.name === product.name);
+    try {
+        // Check if product already exists in cart
+        const existingProduct = AppState.cart.find(item => item.name === product.name);
 
-    if (existingProduct) {
-        existingProduct.quantity += 1;
-    } else {
-        AppState.cart.push(product);
+        if (existingProduct) {
+            existingProduct.quantity += 1;
+        } else {
+            AppState.cart.push(product);
+        }
+
+        updateCartCount();
+        showNotification(`${product.name} added to cart!`, 'success');
+        announceToScreenReader(`${product.name} added to cart. Cart now has ${AppState.cart.length} items.`);
+
+        // Animate cart button
+        if (elements.cartBtn) {
+            elements.cartBtn.classList.add('bounce');
+            setTimeout(() => elements.cartBtn.classList.remove('bounce'), 500);
+        }
+
+        // Save to localStorage
+        saveCartToStorage();
+    } catch (error) {
+        handleError(error, 'addToCart');
+        showNotification('Failed to add item to cart', 'error');
     }
-
-    updateCartCount();
-    showNotification(`${product.name} added to cart!`, 'success');
-    announceToScreenReader(`${product.name} added to cart. Cart now has ${AppState.cart.length} items.`);
-
-    // Animate cart button
-    elements.cartBtn.classList.add('bounce');
-    setTimeout(() => elements.cartBtn.classList.remove('bounce'), 500);
 }
 
 function updateCartCount() {
     const totalItems = AppState.cart.reduce((sum, item) => sum + item.quantity, 0);
-    elements.cartCount.textContent = totalItems;
-    elements.cartBtn.setAttribute('aria-label', `Shopping cart (${totalItems} items)`);
+    if (elements.cartCount) {
+        elements.cartCount.textContent = totalItems;
+    }
+    if (elements.cartBtn) {
+        elements.cartBtn.setAttribute('aria-label', `Shopping cart (${totalItems} items)`);
+    }
+}
+
+function saveCartToStorage() {
+    try {
+        localStorage.setItem('furnmart_cart', JSON.stringify(AppState.cart));
+    } catch (error) {
+        handleError(error, 'saveCartToStorage');
+    }
+}
+
+function loadCartFromStorage() {
+    try {
+        const savedCart = localStorage.getItem('furnmart_cart');
+        if (savedCart) {
+            AppState.cart = JSON.parse(savedCart);
+            updateCartCount();
+        }
+    } catch (error) {
+        handleError(error, 'loadCartFromStorage');
+    }
 }
 
 // ============ Wishlist Functionality ============
@@ -166,38 +274,46 @@ function initWishlist() {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             const productCard = e.target.closest('.product-card');
-            const productName = productCard.querySelector('.product-name').textContent;
+            if (!productCard) return;
 
+            const productName = productCard.querySelector('.product-name')?.textContent || 'Product';
             toggleWishlist(productName, btn);
         });
     });
 }
 
 function toggleWishlist(productName, btn) {
-    const index = AppState.wishlist.indexOf(productName);
+    try {
+        const index = AppState.wishlist.indexOf(productName);
 
-    if (index === -1) {
-        // Add to wishlist
-        AppState.wishlist.push(productName);
-        btn.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-            </svg>
-        `;
-        btn.setAttribute('aria-label', 'Remove from wishlist');
-        showNotification(`${productName} added to wishlist!`, 'success');
-        announceToScreenReader(`${productName} added to wishlist`);
-    } else {
-        // Remove from wishlist
-        AppState.wishlist.splice(index, 1);
-        btn.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-            </svg>
-        `;
-        btn.setAttribute('aria-label', 'Add to wishlist');
-        showNotification(`${productName} removed from wishlist`, 'info');
-        announceToScreenReader(`${productName} removed from wishlist`);
+        if (index === -1) {
+            // Add to wishlist
+            AppState.wishlist.push(productName);
+            btn.innerHTML = `
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            `;
+            btn.setAttribute('aria-label', 'Remove from wishlist');
+            showNotification(`${productName} added to wishlist!`, 'success');
+            announceToScreenReader(`${productName} added to wishlist`);
+        } else {
+            // Remove from wishlist
+            AppState.wishlist.splice(index, 1);
+            btn.innerHTML = `
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            `;
+            btn.setAttribute('aria-label', 'Add to wishlist');
+            showNotification(`${productName} removed from wishlist`, 'info');
+            announceToScreenReader(`${productName} removed from wishlist`);
+        }
+
+        // Save to localStorage
+        localStorage.setItem('furnmart_wishlist', JSON.stringify(AppState.wishlist));
+    } catch (error) {
+        handleError(error, 'toggleWishlist');
     }
 }
 
@@ -208,7 +324,7 @@ function initARModal() {
     // Open modal buttons
     [elements.tryArBtn, elements.launchArBtn].forEach(btn => {
         if (btn) {
-            btn.addEventListener('click', openARModal);
+            btn.addEventListener('click', () => openARModal());
         }
     });
 
@@ -237,7 +353,7 @@ function initARModal() {
             badge.addEventListener('click', (e) => {
                 e.preventDefault();
                 const productCard = e.target.closest('.product-card');
-                const productName = productCard.querySelector('.product-name').textContent;
+                const productName = productCard?.querySelector('.product-name')?.textContent || 'Furniture';
                 openARModal(productName);
             });
         });
@@ -245,6 +361,8 @@ function initARModal() {
 }
 
 function openARModal(productName = 'Furniture') {
+    if (!elements.arModal) return;
+
     elements.arModal.removeAttribute('hidden');
     document.body.style.overflow = 'hidden';
 
@@ -254,15 +372,18 @@ function openARModal(productName = 'Furniture') {
     );
     if (focusableElements.length > 0) {
         focusableElements[0].focus();
+        trapFocus(elements.arModal);
     }
 
     announceToScreenReader(`AR viewer opened for ${productName}`);
-    console.log('AR Modal opened for:', productName);
 }
 
 function closeARModal() {
+    if (!elements.arModal) return;
+
     elements.arModal.setAttribute('hidden', '');
     document.body.style.overflow = '';
+    releaseFocus();
 
     // Return focus to trigger button
     if (elements.tryArBtn) {
@@ -272,11 +393,46 @@ function closeARModal() {
     announceToScreenReader('AR viewer closed');
 }
 
-// ============ Product Loading (Prototype) ============
-function loadProducts() {
-    // In a real application, this would fetch from an API
-    // For prototype, we'll just add interaction to existing products
-    console.log('Products loaded from static HTML');
+// ============ Lazy Loading Images (Enhanced) ============
+function initLazyLoading() {
+    // Add placeholder attribute to images that need lazy loading
+    const images = document.querySelectorAll('img[loading="lazy"]');
+
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+
+                    // If image has data-src, use it, otherwise use placeholder
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                    } else if (!img.src || img.src.includes('placeholder')) {
+                        // Use placeholder service if no src
+                        const width = img.width || 600;
+                        const height = img.height || 400;
+                        img.src = `https://placehold.co/${width}x${height}/0051A5/FFFFFF?text=${encodeURIComponent(img.alt || 'Product')}`;
+                    }
+
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px'
+        });
+
+        images.forEach(img => {
+            imageObserver.observe(img);
+        });
+    } else {
+        // Fallback for browsers without IntersectionObserver
+        images.forEach(img => {
+            if (img.dataset.src) {
+                img.src = img.dataset.src;
+            }
+        });
+    }
 }
 
 // ============ Notifications ============
@@ -287,7 +443,6 @@ function showNotification(message, type = 'info') {
     notification.setAttribute('role', 'alert');
     notification.setAttribute('aria-live', 'polite');
 
-    // Style the notification
     Object.assign(notification.style, {
         position: 'fixed',
         bottom: '20px',
@@ -304,7 +459,6 @@ function showNotification(message, type = 'info') {
 
     document.body.appendChild(notification);
 
-    // Remove after 3 seconds
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease';
         setTimeout(() => notification.remove(), 300);
@@ -316,7 +470,6 @@ function announceToScreenReader(message) {
     const liveRegion = document.querySelector('[aria-live="polite"]');
     if (liveRegion) {
         liveRegion.textContent = message;
-        // Clear after announcement
         setTimeout(() => {
             liveRegion.textContent = '';
         }, 1000);
@@ -350,7 +503,6 @@ function initSmoothScroll() {
                     behavior: 'smooth',
                     block: 'start'
                 });
-                // Set focus for accessibility
                 target.setAttribute('tabindex', '-1');
                 target.focus();
             }
@@ -358,47 +510,25 @@ function initSmoothScroll() {
     });
 }
 
-// ============ Lazy Loading Images ============
-function initLazyLoading() {
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
-                    }
-                    observer.unobserve(img);
-                }
-            });
-        });
-
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            imageObserver.observe(img);
-        });
-    }
-}
-
 // ============ Form Validation ============
 function initFormValidation() {
-    const newsletterForm = document.querySelector('.newsletter-form');
+    const newsletterForms = document.querySelectorAll('.newsletter-form');
 
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', (e) => {
+    newsletterForms.forEach(form => {
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
-            const email = newsletterForm.querySelector('input[type="email"]').value;
+            const email = form.querySelector('input[type="email"]').value;
 
             if (validateEmail(email)) {
                 showNotification('Thank you for subscribing!', 'success');
-                newsletterForm.reset();
+                form.reset();
                 announceToScreenReader('Successfully subscribed to newsletter');
             } else {
                 showNotification('Please enter a valid email address', 'error');
                 announceToScreenReader('Invalid email address. Please try again.');
             }
         });
-    }
+    });
 }
 
 function validateEmail(email) {
@@ -408,7 +538,6 @@ function validateEmail(email) {
 
 // ============ Keyboard Navigation Enhancement ============
 function initKeyboardNavigation() {
-    // Enhance keyboard navigation for product cards
     const productCards = document.querySelectorAll('.product-card');
 
     productCards.forEach(card => {
@@ -426,67 +555,44 @@ function initKeyboardNavigation() {
     });
 }
 
-// ============ Dark Mode Toggle (Bonus Feature) ============
-function initDarkMode() {
-    // Check for saved preference or system preference
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-        document.body.classList.add('dark-mode');
-    }
-
-    // Listen for system theme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) {
-            document.body.classList.toggle('dark-mode', e.matches);
-        }
-    });
-}
-
-// ============ Performance Monitoring ============
-function initPerformanceMonitoring() {
-    if ('performance' in window) {
-        window.addEventListener('load', () => {
-            const perfData = window.performance.timing;
-            const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-            console.log(`Page load time: ${pageLoadTime}ms`);
-
-            // Log to analytics (prototype)
-            console.log('Performance metrics logged');
-        });
-    }
-}
-
-// ============ Error Handling ============
+// ============ Global Error Handler ============
 window.addEventListener('error', (e) => {
-    console.error('Global error:', e.error);
-    // In production, send to error tracking service
+    handleError(e.error, 'Global Error');
+});
+
+window.addEventListener('unhandledrejection', (e) => {
+    handleError(e.reason, 'Unhandled Promise Rejection');
 });
 
 // ============ Initialization ============
 function init() {
-    console.log('Furnmart Botswana initialized');
+    try {
+        showLoading();
 
-    // Initialize all features
-    initMobileMenu();
-    initSearch();
-    initCart();
-    initWishlist();
-    initARModal();
-    initSmoothScroll();
-    initLazyLoading();
-    initFormValidation();
-    initKeyboardNavigation();
-    initDarkMode();
-    initPerformanceMonitoring();
-    loadProducts();
+        // Load saved data
+        loadCartFromStorage();
 
-    // Add CSS animations
-    addAnimations();
+        // Initialize all features
+        initMobileMenu();
+        initSearch();
+        initCart();
+        initWishlist();
+        initARModal();
+        initSmoothScroll();
+        initLazyLoading();
+        initFormValidation();
+        initKeyboardNavigation();
 
-    console.log('All features initialized');
-    announceToScreenReader('Page loaded. Welcome to Furnmart Botswana.');
+        // Add CSS animations
+        addAnimations();
+
+        hideLoading();
+        announceToScreenReader('Page loaded. Welcome to Furnmart Botswana.');
+    } catch (error) {
+        hideLoading();
+        handleError(error, 'Initialization');
+        showNotification('Some features may not work correctly', 'error');
+    }
 }
 
 // ============ CSS Animations ============

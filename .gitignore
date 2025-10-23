@@ -19,3 +19,22 @@ build/
 # Logs
 *.log
 npm-debug.log*
+
+# SECURITY: Private Keys and Credentials
+*.key
+*.pem
+*.p12
+*.pfx
+LR409*
+id_rsa*
+*.ppk
+.env
+.env.local
+.env.production
+secrets/
+credentials/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/

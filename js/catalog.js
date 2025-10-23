@@ -1,6 +1,7 @@
 /**
  * Catalog Page JavaScript
  * Furnmart Botswana - Product filtering, sorting, and view management
+ * Production Version - v1.0.0
  */
 
 // ============ Catalog State ============
@@ -25,17 +26,23 @@ const catalogElements = {
     viewBtns: document.querySelectorAll('.view-btn'),
     productsGrid: document.getElementById('products-grid'),
     resultsCount: document.getElementById('results-count'),
-    paginationBtns: document.querySelectorAll('.pagination-btn')
+    paginationBtns: document.querySelectorAll('.pagination-btn'),
+    filtersSidebar: document.querySelector('.filters-sidebar')
 };
 
 // ============ Initialize Catalog ============
 function initCatalog() {
-    initFilters();
-    initSorting();
-    initViewToggle();
-    initPagination();
+    try {
+        initFilters();
+        initSorting();
+        initViewToggle();
+        initPagination();
 
-    console.log('Catalog initialized');
+        // Load from URL parameters if present
+        loadFromURLParams();
+    } catch (error) {
+        console.error('Error initializing catalog:', error);
+    }
 }
 
 // ============ Filter Management ============
@@ -72,6 +79,7 @@ function handleFilterChange(checkbox) {
     }
 
     applyFilters();
+    updateURLParams();
     announceToScreenReader(`Filter ${checkbox.checked ? 'applied' : 'removed'}: ${filterValue}`);
 }
 
@@ -90,19 +98,24 @@ function clearAllFilters() {
     };
 
     applyFilters();
+    updateURLParams();
     announceToScreenReader('All filters cleared');
 }
 
 function applyFilters() {
-    // In production, this would filter products based on CatalogState.filters
-    console.log('Applying filters:', CatalogState.filters);
-
-    // Update results count
     const filteredCount = calculateFilteredCount();
     updateResultsCount(filteredCount);
 
     // Reset to page 1 when filters change
     CatalogState.currentPage = 1;
+
+    // Simulate filter application (in production, would fetch from API)
+    if (catalogElements.productsGrid) {
+        catalogElements.productsGrid.style.opacity = '0.6';
+        setTimeout(() => {
+            catalogElements.productsGrid.style.opacity = '1';
+        }, 300);
+    }
 }
 
 function calculateFilteredCount() {
@@ -125,13 +138,11 @@ function initSorting() {
     catalogElements.sortSelect.addEventListener('change', (e) => {
         CatalogState.sortBy = e.target.value;
         applySorting();
+        updateURLParams();
     });
 }
 
 function applySorting() {
-    console.log('Sorting by:', CatalogState.sortBy);
-
-    // In production, this would re-order products
     announceToScreenReader(`Products sorted by ${CatalogState.sortBy}`);
 
     // Simulate sorting animation
@@ -173,7 +184,6 @@ function setViewMode(mode) {
     }
 
     announceToScreenReader(`View changed to ${mode} view`);
-    console.log('View mode:', mode);
 }
 
 // ============ Pagination ============
@@ -181,9 +191,10 @@ function initPagination() {
     if (!catalogElements.paginationBtns) return;
 
     catalogElements.paginationBtns.forEach(btn => {
-        if (btn.textContent.trim() && !isNaN(btn.textContent)) {
+        const pageText = btn.textContent.trim();
+        if (pageText && !isNaN(pageText)) {
             btn.addEventListener('click', () => {
-                const page = parseInt(btn.textContent);
+                const page = parseInt(pageText);
                 goToPage(page);
             });
         }
@@ -203,7 +214,7 @@ function initPagination() {
 
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
-            const maxPages = 12; // In production, calculate from total items
+            const maxPages = 12;
             if (CatalogState.currentPage < maxPages) {
                 goToPage(CatalogState.currentPage + 1);
             }
@@ -226,15 +237,15 @@ function goToPage(pageNumber) {
     });
 
     // Scroll to top of products
-    catalogElements.productsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (catalogElements.productsGrid) {
+        catalogElements.productsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 
+    updateURLParams();
     announceToScreenReader(`Page ${pageNumber} loaded`);
-    console.log('Current page:', pageNumber);
-
-    // In production, load products for this page
 }
 
-// ============ Mobile Filter Toggle ============
+// ============ Mobile Filter Toggle with Close Button ============
 function initMobileFilters() {
     // Create mobile filter toggle button
     const filterToggleBtn = document.createElement('button');
@@ -246,43 +257,114 @@ function initMobileFilters() {
         Filters
     `;
     filterToggleBtn.setAttribute('aria-label', 'Toggle filters');
+    filterToggleBtn.setAttribute('aria-expanded', 'false');
 
     // Insert before catalog controls
     const catalogControls = document.querySelector('.catalog-controls');
     if (catalogControls && window.innerWidth <= 768) {
         catalogControls.parentNode.insertBefore(filterToggleBtn, catalogControls);
 
+        // Add close button to sidebar
+        if (catalogElements.filtersSidebar) {
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'sidebar-close';
+            closeBtn.innerHTML = '×';
+            closeBtn.setAttribute('aria-label', 'Close filters');
+            closeBtn.style.cssText = `
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: none;
+                border: none;
+                font-size: 2rem;
+                cursor: pointer;
+                color: var(--medium-gray);
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10;
+            `;
+
+            catalogElements.filtersSidebar.insertBefore(
+                closeBtn,
+                catalogElements.filtersSidebar.firstChild
+            );
+
+            // Close button handler
+            closeBtn.addEventListener('click', () => {
+                closeMobileFilters();
+            });
+        }
+
+        // Toggle handler
         filterToggleBtn.addEventListener('click', () => {
-            const sidebar = document.querySelector('.filters-sidebar');
+            const sidebar = catalogElements.filtersSidebar;
             if (sidebar) {
-                sidebar.classList.toggle('active');
                 const isOpen = sidebar.classList.contains('active');
-                filterToggleBtn.setAttribute('aria-expanded', isOpen);
 
                 if (isOpen) {
-                    document.body.style.overflow = 'hidden';
+                    closeMobileFilters();
                 } else {
-                    document.body.style.overflow = '';
+                    openMobileFilters();
                 }
             }
         });
 
         // Close sidebar when clicking outside
         document.addEventListener('click', (e) => {
-            const sidebar = document.querySelector('.filters-sidebar');
+            const sidebar = catalogElements.filtersSidebar;
             if (sidebar && sidebar.classList.contains('active')) {
                 if (!sidebar.contains(e.target) && !filterToggleBtn.contains(e.target)) {
-                    sidebar.classList.remove('active');
-                    document.body.style.overflow = '';
+                    closeMobileFilters();
+                }
+            }
+        });
+
+        // Close on escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const sidebar = catalogElements.filtersSidebar;
+                if (sidebar && sidebar.classList.contains('active')) {
+                    closeMobileFilters();
                 }
             }
         });
     }
 }
 
+function openMobileFilters() {
+    if (catalogElements.filtersSidebar) {
+        catalogElements.filtersSidebar.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        const toggleBtn = document.querySelector('.mobile-filter-toggle');
+        if (toggleBtn) {
+            toggleBtn.setAttribute('aria-expanded', 'true');
+        }
+
+        announceToScreenReader('Filters panel opened');
+    }
+}
+
+function closeMobileFilters() {
+    if (catalogElements.filtersSidebar) {
+        catalogElements.filtersSidebar.classList.remove('active');
+        document.body.style.overflow = '';
+
+        const toggleBtn = document.querySelector('.mobile-filter-toggle');
+        if (toggleBtn) {
+            toggleBtn.setAttribute('aria-expanded', 'false');
+            toggleBtn.focus();
+        }
+
+        announceToScreenReader('Filters panel closed');
+    }
+}
+
 // ============ URL Parameter Management ============
 function updateURLParams() {
-    // Update URL with current filters and sorting (for bookmarking/sharing)
     const params = new URLSearchParams();
 
     // Add filters
@@ -308,7 +390,6 @@ function updateURLParams() {
 }
 
 function loadFromURLParams() {
-    // Load filters from URL parameters (for bookmarking/sharing)
     const params = new URLSearchParams(window.location.search);
 
     // Load filters
@@ -360,27 +441,29 @@ function announceToScreenReader(message) {
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         initCatalog();
-        loadFromURLParams();
         if (window.innerWidth <= 768) {
             initMobileFilters();
         }
     });
 } else {
     initCatalog();
-    loadFromURLParams();
     if (window.innerWidth <= 768) {
         initMobileFilters();
     }
 }
 
 // Handle window resize
+let resizeTimer;
 window.addEventListener('resize', () => {
-    if (window.innerWidth <= 768 && !document.querySelector('.mobile-filter-toggle')) {
-        initMobileFilters();
-    }
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        if (window.innerWidth <= 768 && !document.querySelector('.mobile-filter-toggle')) {
+            initMobileFilters();
+        }
+    }, 250);
 });
 
-// Export for testing
+// ============ Export for testing ============
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         CatalogState,
